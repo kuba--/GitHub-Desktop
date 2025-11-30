@@ -3,7 +3,10 @@ import {
   app,
   dialog,
   BrowserWindow,
-  autoUpdater,
+
+  // --- Auto-Updater Disabled Patch ---
+  // Completely bypass all updater operations by short-circuiting exports.
+  // autoUpdater,
   nativeTheme,
 } from 'electron'
 import { shell } from '../lib/app-shell'
@@ -148,7 +151,7 @@ export class AppWindow {
         return
       }
       nativeTheme.removeAllListeners()
-      autoUpdater.removeAllListeners()
+      // autoUpdater.removeAllListeners()
       terminateDesktopNotifications()
     })
   }
@@ -390,56 +393,56 @@ export class AppWindow {
   }
 
   public setupAutoUpdater() {
-    autoUpdater.on('error', (error: Error) => {
-      this.isDownloadingUpdate = false
-      ipcWebContents.send(this.window.webContents, 'auto-updater-error', error)
-    })
+    // autoUpdater.on('error', (error: Error) => {
+    //   this.isDownloadingUpdate = false
+    //   ipcWebContents.send(this.window.webContents, 'auto-updater-error', error)
+    // })
 
-    autoUpdater.on('checking-for-update', () => {
-      this.isDownloadingUpdate = false
-      ipcWebContents.send(
-        this.window.webContents,
-        'auto-updater-checking-for-update'
-      )
-    })
+    // autoUpdater.on('checking-for-update', () => {
+    //   this.isDownloadingUpdate = false
+    //   ipcWebContents.send(
+    //     this.window.webContents,
+    //     'auto-updater-checking-for-update'
+    //   )
+    // })
 
-    autoUpdater.on('update-available', () => {
-      this.isDownloadingUpdate = true
-      ipcWebContents.send(
-        this.window.webContents,
-        'auto-updater-update-available'
-      )
-    })
+    // autoUpdater.on('update-available', () => {
+    //   this.isDownloadingUpdate = true
+    //   ipcWebContents.send(
+    //     this.window.webContents,
+    //     'auto-updater-update-available'
+    //   )
+    // })
 
-    autoUpdater.on('update-not-available', () => {
-      this.isDownloadingUpdate = false
-      ipcWebContents.send(
-        this.window.webContents,
-        'auto-updater-update-not-available'
-      )
-    })
+    // autoUpdater.on('update-not-available', () => {
+    //   this.isDownloadingUpdate = false
+    //   ipcWebContents.send(
+    //     this.window.webContents,
+    //     'auto-updater-update-not-available'
+    //   )
+    // })
 
-    autoUpdater.on('update-downloaded', () => {
-      this.isDownloadingUpdate = false
-      ipcWebContents.send(
-        this.window.webContents,
-        'auto-updater-update-downloaded'
-      )
-    })
+    // autoUpdater.on('update-downloaded', () => {
+    //   this.isDownloadingUpdate = false
+    //   ipcWebContents.send(
+    //     this.window.webContents,
+    //     'auto-updater-update-downloaded'
+    //   )
+    // })
   }
 
   public async checkForUpdates(url: string) {
-    try {
-      autoUpdater.setFeedURL({ url: await trySetUpdaterGuid(url) })
-      autoUpdater.checkForUpdates()
-    } catch (e) {
-      return e
-    }
+    // try {
+    //   autoUpdater.setFeedURL({ url: await trySetUpdaterGuid(url) })
+    //   autoUpdater.checkForUpdates()
+    // } catch (e) {
+    //   return e
+    // }
     return undefined
   }
 
   public quitAndInstallUpdate() {
-    autoUpdater.quitAndInstall()
+    // autoUpdater.quitAndInstall()
   }
 
   public minimizeWindow() {
