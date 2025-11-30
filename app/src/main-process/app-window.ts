@@ -4,8 +4,8 @@ import {
   dialog,
   BrowserWindow,
 
-  // --- Auto-Updater Disabled Patch ---
-  // Completely bypass all updater operations by short-circuiting exports.
+  // --- Auto-Updater Disabled  ---
+  // Completely bypass all updater operations by:
   // autoUpdater,
   nativeTheme,
 } from 'electron'
@@ -30,7 +30,7 @@ import {
   terminateDesktopNotifications,
 } from './notifications'
 import { addTrustedIPCSender } from './trusted-ipc-sender'
-import { getUpdaterGUID } from '../lib/get-updater-guid'
+// import { getUpdaterGUID } from '../lib/get-updater-guid'
 import { CLIAction } from '../lib/cli-action'
 
 export class AppWindow {
@@ -497,17 +497,17 @@ export class AppWindow {
   }
 }
 
-const trySetUpdaterGuid = async (url: string) => {
-  try {
-    const id = await getUpdaterGUID()
-    if (!id) {
-      return url
-    }
+// const trySetUpdaterGuid = async (url: string) => {
+//   try {
+//     const id = await getUpdaterGUID()
+//     if (!id) {
+//       return url
+//     }
 
-    const parsed = new URL(url)
-    parsed.searchParams.set('guid', id)
-    return parsed.toString()
-  } catch (e) {
-    return url
-  }
-}
+//     const parsed = new URL(url)
+//     parsed.searchParams.set('guid', id)
+//     return parsed.toString()
+//   } catch (e) {
+//     return url
+//   }
+// }
